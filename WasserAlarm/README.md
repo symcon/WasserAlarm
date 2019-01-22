@@ -3,7 +3,7 @@ Das Modul dient dazu einen unnatürlich hohen Wasserverbrauch festzustellen. Es 
 Es gibt zwei Alarmvariablen.  
 Einen Rohrbruch-Alarm, welcher schaltet wenn große Mengen auf einmal fließen.
 Einen Leckage-Alarm, welcher in 7 Stufen hochtickt wenn über längeren Zeitraum eine kleine Menge fließt (z.B. tropfender Wasserhahn).
-Das Intervall für beide Kontrollen
+Das Intervall für beide Kontrollen kann über die Konfiguration eingestellt werden.
 
 ### Inhaltverzeichnis
 
