@@ -10,5 +10,6 @@
     "parentRequirements": [],
     "childRequirements": [],
     "implemented": [],
-    "prefix": "WAA"
+    "prefix": "WAA",
+    "url": "https://github.com/symcon/WasserAlarm/tree/master/WasserAlarm"
 }
