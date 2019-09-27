@@ -5,7 +5,7 @@ Einen Rohrbruch-Alarm, welcher schaltet wenn große Mengen auf einmal fließen.
 Einen Leckage-Alarm, welcher in 7 Stufen hochtickt wenn über längeren Zeitraum eine kleine Menge fließt (z.B. tropfender Wasserhahn).
 Das Intervall für beide Kontrollen kann über die Konfiguration eingestellt werden.
 
-### Inhaltverzeichnis
+### Inhaltsverzeichnis
 
 1. [Funktionsumfang](#1-funktionsumfang)
 2. [Voraussetzungen](#2-voraussetzungen)
@@ -25,17 +25,17 @@ Das Intervall für beide Kontrollen kann über die Konfiguration eingestellt wer
 
 ### 2. Voraussetzungen
 
-- IP-Symcon ab Version 4.x
+- IP-Symcon ab Version 4.2
 
 ### 3. Software-Installation
 
-* Über den Modul Store das Modul Wasser-Alarm installieren.
-* Alternativ über das Modul Control folgende URL hinzufügen:
-´https://github.com/symcon/WasserAlarm´
+* Über den Module Store das Modul Wasser-Alarm installieren.
+* Alternativ über das Module Control folgende URL hinzufügen:
+`https://github.com/symcon/WasserAlarm`
 
 ### 4. Einrichten der Instanzen in IP-Symcon
 
-- Unter "Instanz hinzufügen" ist das 'WasserAlarm'-Modul unter dem Hersteller '(Sonstige)' aufgeführt.  
+- Unter "Instanz hinzufügen" ist das 'WasserAlarm'-Modul unter dem Hersteller '(Gerät)' aufgeführt.  
 
 __Konfigurationsseite__:
 
@@ -72,7 +72,7 @@ Es wird zusätzlich angezeigt, ob ein Alarm vorliegt oder nicht.
 
 ### 7. PHP-Befehlsreferenz
 
-`boolean WAA_CheckAlert(integer $InstanzID, String $BorderValue, String $OldValue);`
+`boolean WAA_CheckAlert(integer $InstanzID, string $BorderValue, string $OldValue);`
 Kontrolliert innerhalb des WasserAlarms mit der InstanzID $InstanzID ob ein Grenzwert überschritten wurde und setzt die Alarmvariablen  
 Die Funktion liefert keinerlei Rückgabewert.  
-`WAA_CheckAlert(12345, "LeakThreashold", "LeakBuffer");``
+`WAA_CheckAlert(12345, "LeakThreashold", "LeakBuffer");`
