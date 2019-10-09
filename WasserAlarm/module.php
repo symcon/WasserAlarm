@@ -65,12 +65,22 @@ class WasserAlarm extends IPSModule
         //Never delete this line!
         parent::ApplyChanges();
 
-        if ($this->ReadPropertyInteger('MeterID') != 0) {
-            $MeterValue = GetValue($this->ReadPropertyInteger('MeterID'));
+        $sourceID = $this->ReadPropertyInteger('MenterID');
+        if ($sourceID != 0) {
+            $MeterValue = GetValue($sourceID);
             $this->SetBuffer('LeakBuffer', json_encode($MeterValue));
             $this->SetBuffer('PipeBurstBuffer', json_encode($MeterValue));
             $this->SetTimerInterval('UpdateLeak', $this->ReadPropertyInteger('LeakInterval') * 60 * 1000);
             $this->SetTimerInterval('UpdatePipeBurst', $this->ReadPropertyInteger('PipeBurstInterval') * 60 * 1000);
+        }
+
+        //Deleting references
+        foreach ($this->GetReferenceList() as $referenceID) {
+            $this->UnregisterReference($referenceID);
+        }
+        //Add reference
+        if (IPS_VariableExists($sourceID)) {
+            $this->RegisterReference($sourceID);
         }
     }
 
