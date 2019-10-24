@@ -65,7 +65,7 @@ class WasserAlarm extends IPSModule
         //Never delete this line!
         parent::ApplyChanges();
 
-        $sourceID = $this->ReadPropertyInteger('MenterID');
+        $sourceID = $this->ReadPropertyInteger('MeterID');
         if ($sourceID != 0) {
             $MeterValue = GetValue($sourceID);
             $this->SetBuffer('LeakBuffer', json_encode($MeterValue));
