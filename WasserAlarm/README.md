@@ -35,7 +35,7 @@ Das Intervall für beide Kontrollen kann über die Konfiguration eingestellt wer
 
 ### 4. Einrichten der Instanzen in IP-Symcon
 
-- Unter "Instanz hinzufügen" ist das 'WasserAlarm'-Modul unter dem Hersteller '(Gerät)' aufgeführt.  
+- Unter "Instanz hinzufügen" kann das 'WasserAlarm'-Modul mithilfe der Schnellsuche gefunden werden.  
 
 __Konfigurationsseite__:
 
