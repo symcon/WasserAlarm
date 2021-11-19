@@ -10,6 +10,12 @@
 			"caption": "Metervariable"
 		},
 		{
+			"type": "NumberSpinner",
+			"caption": "AlertBoarder",
+			"minimum": 0,
+			"maximum": 6
+		},
+		{
 			"type": "Label",
 			"label": "Leak timer interval"
 		},
