@@ -2,7 +2,7 @@
 	"elements": [
 		{
 			"type": "Label",
-			"label": "Metervalue which should be used"
+			"caption": "Metervalue which should be used"
 		},
 		{
 			"type": "SelectVariable",
@@ -32,26 +32,24 @@
 			"type": "NumberSpinner",
 			"caption": "Alert threshold",
 			"name": "AlarmThresholder",
-			"minimum": 1,
+			"minimum": 0,
 			"maximum": 6
 		},
 		{
 			"type": "Label",
-			"label": "Leak timer interval"
+			"caption": "Timer interval"
 		},
 		{
-			"type": "IntervalBox",
+			"type": "NumberSpinner",
 			"name": "LeakInterval",
-			"caption": "Minutes"
+			"caption": "Leak timer interval",
+			"suffix": "Minutes"
 		},
 		{
-			"type": "Label",
-			"label": "Pipe burst timer interval"
-		},
-		{
-			"type": "IntervalBox",
-			"name": "PipeBurstInterval",
-			"caption": "Minutes"
+			"type": "NumberSpinner",
+			"name": "BurstInterval",
+			"caption": "Burst timer interval",
+			"suffix": "Minutes"
 		}
 	]
 }

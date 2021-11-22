@@ -1,10 +1,10 @@
 {
     "id": "{98F467A7-CD43-442D-95FD-AAA0CE8D9F65}",
-    "name": "WasserAlarm",
+    "name": "VerbraucherAlarm",
     "type": 3,
     "vendor": "",
     "aliases": [
-        "WasserAlarm"
+        "Verbraucherkontroll Alarm"
     ],
     "parentRequirements": [],
     "childRequirements": [],
