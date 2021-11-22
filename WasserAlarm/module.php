@@ -1,6 +1,11 @@
 <?php
 
 declare(strict_types=1);
+
+define('TYPE_WATER', 0);
+define('TYPE_ELECTICITY', 1);
+define('TYPE_GAS', 2);
+
 class WasserAlarm extends IPSModule
 {
     public function Create()
@@ -13,7 +18,8 @@ class WasserAlarm extends IPSModule
         $this->RegisterPropertyInteger('MeterID', 0);
         $this->RegisterPropertyInteger('LeakInterval', 1);
         $this->RegisterPropertyInteger('PipeBurstInterval', 5);
-        $this->RegisterPropertyInteger('AlarmBoarder', 2);
+        $this->RegisterPropertyInteger('flowType', TYPE_WATER);
+        $this->RegisterPropertyInteger('AlarmThresholder', 2);
 
         //Timer
         $this->RegisterTimer('UpdateLeak', 0, 'WAA_CheckAlert($_IPS[\'TARGET\'], "LeakThreshold", "LeakBuffer");');
@@ -54,7 +60,7 @@ class WasserAlarm extends IPSModule
         $this->RegisterVariableFloat('PipeBurstThreshold', $this->Translate('Pipe burst threshold'), 'WAA.ThresholdValue');
         $this->EnableAction('PipeBurstThreshold');
 
-        $this->RegisterVariableBoolean('AlarmAlert', $this->Translate('Alert for Alarm'), '~Alert'); 
+        $this->RegisterVariableBoolean('AlarmAlert', $this->Translate('Alarm Alert'), '~Alert');
     }
 
     public function Destroy()
@@ -85,6 +91,19 @@ class WasserAlarm extends IPSModule
         if (IPS_VariableExists($sourceID)) {
             $this->RegisterReference($sourceID);
         }
+
+        $value = $this->ReadPropertyInteger('flowType');
+        if ($value == TYPE_WATER) {
+            $this->MaintainVariable('LeakThreshold', $this->Translate('Leak'), 2, '~Flow', 0, true);
+            $this->MaintainVariable('BurstThreshold', $this->Translate('Burst'), 2, '~Flow', 0, true);
+        } elseif ($value == TYPE_ELECTICITY) {
+            $this->MaintainVariable('LeakThreshold', $this->Translate('Leak'), 2, '~Electricity', 0, true);
+            $this->MaintainVariable('BurstThreshold', $this->Translate('Burst'), 2, '~Electricity', 0, true);
+        } elseif ($value == TYPE_GAS) {
+            $this->MaintainVariable('LeakThreshold', $this->Translate('Leak'), 2, '~Gas', 0, true);
+            $this->MaintainVariable('BurstThreshold', $this->Translate('Burst'), 2, '~Gas', 0, true);
+        }
+
     }
 
     public function CheckAlert(string $ThresholdName, string $BufferName)
@@ -101,10 +120,9 @@ class WasserAlarm extends IPSModule
                 SetValue($this->GetIDForIdent('PipeBurst'), true);
                 $this->SetBuffer($BufferName, json_encode($MeterValue));
             }
-            
-            // if Leak is over the AlarmBoarder or PipeBust is true -> send Alarm 
-            if(GetValue($this->GetIDForIdent('Leak')) > $this->ReadPropertyInteger('AlarmBoarder') || GetValue($this->GetIDForIdent('PipeBurst'))){
-                SetValueBoolean($this->GetIDForIdent('AlarmAlert'),true);
+
+            // if Leak is over the AlarmThresholder or Burst is true -> send Alarm
+            if (GetValue($this->GetIDForIdent('Leak')) > $this->ReadPropertyInteger('AlarmThresholder') || GetValue($this->GetIDForIdent('Burst'))) {
             }
         }
         // if Threshold is not exceeded -> reset Alert
@@ -115,6 +133,10 @@ class WasserAlarm extends IPSModule
             } elseif (GetValueFloat($this->GetIDForIdent($ThresholdName)) != 0) {
                 SetValue($this->GetIDForIdent('PipeBurst'), false);
                 $this->SetBuffer($BufferName, json_encode($MeterValue));
+            }
+            //reset the Alarm
+            if (GetValue($this->GetIDForIdent('Leak')) < $this->ReadPropertyInteger('AlarmThresholder') || !GetValue($this->GetIDForIdent('Burst'))) {
+                SetValueBoolean($this->GetIDForIdent('AlarmAlert'), false);
             }
         }
     }

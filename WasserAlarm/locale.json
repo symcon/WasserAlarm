@@ -3,8 +3,8 @@
 		"de": {
 			"Metervalue which should be used": "Zählerwert welcher ausgelesen werden soll.",
 			"Metervariable": "Zählervariable",
-			"Leak timer interval": "Leckage Timer Intervall",
 			"Pipe burst timer interval": "Rohrburch Timer Intervall",
+			"Leak timer interval": "Kleinverbrauch Zeitintervall",
 			"Minutes": "Minuten",
 			"No activity": "Keine Aktivität",
 			"Everything fine": "Alles im grünen Bereich",
@@ -13,11 +13,18 @@
 			"Abnormal activity": "Unnormale Aktivität",
 			"Pre-Alarm": "Vor-Alarm",
 			"Alarm triggered": "Alarm ausgelöst",
-			"Leak": "Leckage",
-			"Leak threshold": "Leckage Grenzwert",
 			"Pipe burst": "Rohrbruch",
 			"Pipe burst threshold": "Rohrburch Grenzwert",
-			"Invalid Ident": "Unzulässiger Ident"
+			"Leak": "Kleinverbrauch",
+			"Leak threshold": "Kleinverbrauch Grenzwert",
+			"Invalid Ident": "Unzulässiger Ident",
+			"Type of Flow": "Durchflussart",
+			"Water": "Wasser",
+			"Electricity": "Strom",
+			"Gas":"Gas",
+			"Alarm Alert": "Alarmbenachichtigung",
+			"Alert threshold": "Alarmauslöser",
+			"Timer interval": "Zeitintervall"
 		}
 	}
 }

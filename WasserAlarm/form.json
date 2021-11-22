@@ -10,9 +10,29 @@
 			"caption": "Metervariable"
 		},
 		{
+			"type": "Select",
+			"name": "flowType",
+			"caption": "Type of Flow",
+			"options": [
+				{
+					"caption": "Water",
+					"value": 0
+				},
+				{
+					"caption": "Electricity",
+					"value": 1
+				},
+				{
+					"caption": "Gas",
+					"value": 2
+				}
+			]
+		},
+		{
 			"type": "NumberSpinner",
-			"caption": "AlertBoarder",
-			"minimum": 0,
+			"caption": "Alert threshold",
+			"name": "AlarmThresholder",
+			"minimum": 1,
 			"maximum": 6
 		},
 		{
