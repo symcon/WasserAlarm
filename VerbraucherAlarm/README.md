@@ -1,9 +1,10 @@
 # WasserAlarm
-Das Modul dient dazu einen unnatürlich hohen Wasserverbrauch festzustellen. Es reagiert auf eine Zählervariable und schaltet unter bestimmten Bedingungen einen Alarm.
-Es gibt zwei Alarmvariablen.  
-Einen Rohrbruch-Alarm, welcher schaltet wenn große Mengen auf einmal fließen.
-Einen Leckage-Alarm, welcher in 7 Stufen hochtickt wenn über längeren Zeitraum eine kleine Menge fließt (z.B. tropfender Wasserhahn).
+Das Modul dient dazu einen unnatürlich Verbrauch festzustellen. Es reagiert auf eine Zählervariable und schaltet unter bestimmten Bedingungen einen Alarm.
+Es gibt zwei Zustandsvariablen.  
+Einen Großverbrauch-Zustand, welcher schaltet wenn ein einstellbarer Grenzwert überschritten wird.
+Einen Kleinverbraucher-Zustand, welcher in 7 Stufen hochtickt wenn über längeren Zeitraum einein eingestellter Grenzwert (z.B. tropfender Wasserhahn) überschritten wird.
 Das Intervall für beide Kontrollen kann über die Konfiguration eingestellt werden.
+Ein Alarm, welche schaltet wenn der Großverbrauch-Zustand auf Alarm geschaltet ist, oder der Kleinverbraucher-Alarm einen eingestellten Wert überschreitet. 
 
 ### Inhaltsverzeichnis
 
@@ -18,10 +19,10 @@ Das Intervall für beide Kontrollen kann über die Konfiguration eingestellt wer
 ### 1. Funktionsumfang
 
 * Auswahl der Wasserzählervariable
-* Rohrburch Timer in Minuten einstellbar
-* Leckage Timer in Minuten einstellbar
-* 7 Stufen Anzeige für Leckage
-* Alarmanzeige bei Rohrbruch
+* Groß-/Kleinverbrauch Timer in Minuten einstellbar
+* Groß-/Kleinverbrauch Grenzwert einstellbar
+* 7 Stufen Anzeige für Kleinverbrauch
+* Alarmanzeige bei Großverbrauch
 
 ### 2. Voraussetzungen
 
@@ -35,16 +36,20 @@ Das Intervall für beide Kontrollen kann über die Konfiguration eingestellt wer
 
 ### 4. Einrichten der Instanzen in IP-Symcon
 
-- Unter "Instanz hinzufügen" kann das 'WasserAlarm'-Modul mithilfe des Schnellfilters gefunden werden.
+- Unter "Instanz hinzufügen" kann das 'Verbraucherkontroll Alarm'-Modul mithilfe des Schnellfilters gefunden werden.
     - Weitere Informationen zum Hinzufügen von Instanzen in der [Dokumentation der Instanzen](https://www.symcon.de/service/dokumentation/konzepte/instanzen/#Instanz_hinzufügen)
 
 __Konfigurationsseite__:
 
-Name                | Beschreibung
-------------------- | ---------------------------------
-Zählervariable      | Variable, welche den Zählerwert wiedergibt.
-Leckage Intervall   | __Standard: 1min__ Zeitintervall in dem kontrolliert wird, ob zuviel Wasser durchgeflossen ist.
-Rohrbruch Intervall | __Standard: 15min__ Zeitintervall in dem kontrolliert wird, ob zuviel Wasser durchgeflossen ist.
+Name                     | Beschreibung
+------------------------ | ---------------------------------
+Zählervariable           | Variable, welche den Zählerwert wiedergibt.
+Durchflussart            | __Standard: Wasser__ Art, welches Medium fließt.
+Alarmsauslöser           | __Standard: 6__ Wert, wann der Alarm für den Kleinverbrauch geschaltet werden soll.
+Kleinverbrauch Intervall | __Standard: 1min__ Zeitintervall in dem kontrolliert wird, ob zuviel Wasser durchgeflossen ist.
+Kleinverbrauch Grenzwert | __Standart: 150__ Grenzwert bei dem der Zustand geändert wird.
+Großverbrauch Intervall  | __Standard: 15min__ Zeitintervall in dem kontrolliert wird, ob zuviel Wasser durchgeflossen ist.
+Großverbrauch Grenzwert  | __Standart: 0__ Grenzwert bei dem der Zustand geändert wird.
 
 ### 5. Statusvariablen und Profile
 
@@ -52,19 +57,18 @@ Die Statusvariablen/Kategorien werden automatisch angelegt. Das Löschen einzeln
 
 ##### Statusvariablen
 
-Name                | Typ       | Beschreibung
-------------------- | --------- | ----------------
-Leckage Grenzwert   | Float     | Differenzwert, welcher im eingestellten "Leckage Intervall" überprüft wird und bei Überschreitung wird die "Leckage" um 1 erhöht. Wenn die Differenz unterhalb oder gleich der Grenze ist, wird das Alarmlevel resetet. 
-Leckage             | Integer   | 7 Stufenanzeige für den Stand den Alarmlevels.
-Rohrbruch Grenzwert | Float     | Grenzwert, welcher geprüft wird und gegebenfalls der Auslöser für einen Alarm ist. 
-Rohrbruch           | Boolean   | Alarm ob der Durchfluss zu hoch ist. 
+Name                   | Typ     | Beschreibung
+---------------------- | ------- | ----------------
+Alarmbenachrichtigung  | Boolean | Alarm, wenn Großverbrauch geschaltet oder Kleinverbrauch den Wert überschreitet. 
+Kleinverbrauch Zustand | Integer | 7 Stufenanzeige für den Stand den Alarmlevels.
+Großverbrauch Zustand  | Boolean | Alarm ob der Durchfluss zu hoch ist. 
 
 ##### Profile:
 
 Bezeichnung        | Beschreibung
 ------------------ | -----------------
-WAA.LeakLevel      | Profil für Leckage - 7 Alarmstufen mit verschiedenen Symbolen und Farbanzeigen
-WAA.ThresholdValue | Profil für Leckage/Rohrbruch Grenzwert
+WAA.LeakLevel      | Profil für Kleinverbrauch - 7 Alarmstufen mit verschiedenen Symbolen und Farbanzeigen
+WAA.ThresholdValue | Profil für Klein-/Großverbrauch Grenzwert
 
 ### 6. WebFront
 
