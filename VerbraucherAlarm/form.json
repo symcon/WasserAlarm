@@ -36,10 +36,6 @@
 			"maximum": 6
 		},
 		{
-			"type": "Label",
-			"caption": "Timer interval"
-		},
-		{
 			"type": "NumberSpinner",
 			"name": "LeakInterval",
 			"caption": "Leak timer interval",
@@ -47,9 +43,19 @@
 		},
 		{
 			"type": "NumberSpinner",
+			"name": "LeakThreshold",
+			"caption": "Leak threshold"
+		},
+		{
+			"type": "NumberSpinner",
 			"name": "BurstInterval",
 			"caption": "Burst timer interval",
 			"suffix": "Minutes"
+		},
+		{
+			"type": "NumberSpinner",
+			"name": "BurstThreshold",
+			"caption": "Burst threshold"
 		}
 	]
 }

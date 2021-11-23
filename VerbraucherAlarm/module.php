@@ -20,6 +20,8 @@ class VerbraucherAlarm extends IPSModule
         $this->RegisterPropertyInteger('BurstInterval', 5);
         $this->RegisterPropertyInteger('flowType', TYPE_WATER);
         $this->RegisterPropertyInteger('AlarmThresholder', 6);
+        $this->RegisterPropertyFloat('BurstThreshold', 0.0);
+        $this->RegisterPropertyFloat('LeakThreshold', 150);
 
         //Timer
         $this->RegisterTimer('UpdateLeak', 0, 'WAA_CheckAlert($_IPS[\'TARGET\'], "LeakThreshold", "LeakBuffer");');
@@ -48,17 +50,8 @@ class VerbraucherAlarm extends IPSModule
         }
 
         $this->RegisterVariableInteger('Leak', $this->Translate('Leak'), 'WAA.LeakLevel');
-        $leakThresholdVariableID = $this->RegisterVariableFloat('LeakThreshold', $this->Translate('Leak threshold'), 'WAA.ThresholdValue');
-        $this->EnableAction('LeakThreshold');
-
-        //Define some default value
-        if (GetValue($leakThresholdVariableID) == 0) {
-            SetValue($leakThresholdVariableID, 150);
-        }
 
         $this->RegisterVariableBoolean('Burst', $this->Translate('Burst'), '~Alert');
-        $this->RegisterVariableFloat('BurstThreshold', $this->Translate('Burst threshold'), 'WAA.ThresholdValue');
-        $this->EnableAction('BurstThreshold');
 
         $this->RegisterVariableBoolean('AlarmAlert', $this->Translate('Alarm Alert'), '~Alert');
     }
@@ -91,18 +84,6 @@ class VerbraucherAlarm extends IPSModule
         if (IPS_VariableExists($sourceID)) {
             $this->RegisterReference($sourceID);
         }
-
-        $value = $this->ReadPropertyInteger('flowType');
-        if ($value == TYPE_WATER) {
-            $this->MaintainVariable('LeakThreshold', $this->Translate('Leak'), 2, '~Flow', 0, true);
-            $this->MaintainVariable('BurstThreshold', $this->Translate('Burst'), 2, '~Flow', 0, true);
-        } elseif ($value == TYPE_ELECTICITY) {
-            $this->MaintainVariable('LeakThreshold', $this->Translate('Leak'), 2, '~Electricity', 0, true);
-            $this->MaintainVariable('BurstThreshold', $this->Translate('Burst'), 2, '~Electricity', 0, true);
-        } elseif ($value == TYPE_GAS) {
-            $this->MaintainVariable('LeakThreshold', $this->Translate('Leak'), 2, '~Gas', 0, true);
-            $this->MaintainVariable('BurstThreshold', $this->Translate('Burst'), 2, '~Gas', 0, true);
-        }
     }
 
     public function CheckAlert(string $ThresholdName, string $BufferName)
@@ -111,11 +92,11 @@ class VerbraucherAlarm extends IPSModule
         $ValueOld = json_decode($this->GetBuffer($BufferName));
 
         // if Threshold is exceeded -> Set Alert
-        if (($MeterValue - $ValueOld) > GetValueFloat($this->GetIDForIdent($ThresholdName))) {
+        if (($MeterValue - $ValueOld) > $this->ReadPropertyFloat($ThresholdName)) {
             if ($ThresholdName == 'LeakThreshold') {
                 SetValue($this->GetIDForIdent('Leak'), GetValueInteger($this->GetIDForIdent('Leak')) + 1);
                 $this->SetBuffer($BufferName, json_encode($MeterValue));
-            } elseif (GetValueFloat($this->GetIDForIdent($ThresholdName)) != 0) {
+            } elseif ($this->ReadPropertyFloat($ThresholdName) != 0) {
                 SetValue($this->GetIDForIdent('Burst'), true);
                 $this->SetBuffer($BufferName, json_encode($MeterValue));
             }
