@@ -1,10 +1,10 @@
-# WasserAlarm
+# VerbraucherAlarm
 Das Modul dient dazu einen unnatürlich Verbrauch festzustellen. Es reagiert auf eine Zählervariable und schaltet unter bestimmten Bedingungen einen Alarm.
 Es gibt zwei Zustandsvariablen.  
 Einen Großverbrauch-Zustand, welcher schaltet wenn ein einstellbarer Grenzwert überschritten wird.
-Einen Kleinverbraucher-Zustand, welcher in 7 Stufen hochtickt wenn über längeren Zeitraum einein eingestellter Grenzwert (z.B. tropfender Wasserhahn) überschritten wird.
+Einen Kleinverbrauch-Zustand, welcher in 7 Stufen hochtickt wenn über längeren Zeitraum einen eingestellter Grenzwert (z.B. tropfender Wasserhahn) überschritten wird.
 Das Intervall für beide Kontrollen kann über die Konfiguration eingestellt werden.
-Ein Alarm, welche schaltet wenn der Großverbrauch-Zustand auf Alarm geschaltet ist, oder der Kleinverbraucher-Alarm einen eingestellten Wert überschreitet. 
+Ein Alarm, welche schaltet wenn der Großverbrauch-Zustand auf Alarm geschaltet ist, oder der Kleinverbrauch-Alarm einen eingestellten Wert überschreitet. 
 
 ### Inhaltsverzeichnis
 
@@ -18,7 +18,7 @@ Ein Alarm, welche schaltet wenn der Großverbrauch-Zustand auf Alarm geschaltet 
 
 ### 1. Funktionsumfang
 
-* Auswahl der Wasserzählervariable
+* Auswahl der Zählervariable
 * Groß-/Kleinverbrauch Timer in Minuten einstellbar
 * Groß-/Kleinverbrauch Grenzwert einstellbar
 * 7 Stufen Anzeige für Kleinverbrauch
@@ -30,9 +30,9 @@ Ein Alarm, welche schaltet wenn der Großverbrauch-Zustand auf Alarm geschaltet 
 
 ### 3. Software-Installation
 
-* Über den Module Store das Modul Wasser-Alarm installieren.
+* Über den Module Store das Modul Verbraucher-Alarm installieren.
 * Alternativ über das Module Control folgende URL hinzufügen:
-`https://github.com/symcon/WasserAlarm`
+`https://github.com/symcon/VerbraucherAlarm`
 
 ### 4. Einrichten der Instanzen in IP-Symcon
 
@@ -46,9 +46,9 @@ Name                     | Beschreibung
 Zählervariable           | Variable, welche den Zählerwert wiedergibt.
 Durchflussart            | __Standard: Wasser__ Art, welches Medium fließt.
 Alarmsauslöser           | __Standard: 6__ Wert, wann der Alarm für den Kleinverbrauch geschaltet werden soll.
-Kleinverbrauch Intervall | __Standard: 1min__ Zeitintervall in dem kontrolliert wird, ob zuviel Wasser durchgeflossen ist.
+Kleinverbrauch Intervall | __Standard: 1min__ Zeitintervall in dem kontrolliert wird, ob der Verbrauch zu hoch ist ist.
 Kleinverbrauch Grenzwert | __Standart: 150__ Grenzwert bei dem der Zustand geändert wird.
-Großverbrauch Intervall  | __Standard: 15min__ Zeitintervall in dem kontrolliert wird, ob zuviel Wasser durchgeflossen ist.
+Großverbrauch Intervall  | __Standard: 15min__ Zeitintervall in dem kontrolliert wird, ob der Verbrauch zu hoch ist.
 Großverbrauch Grenzwert  | __Standart: 0__ Grenzwert bei dem der Zustand geändert wird.
 
 ### 5. Statusvariablen und Profile
@@ -78,6 +78,6 @@ Es wird zusätzlich angezeigt, ob ein Alarm vorliegt oder nicht.
 ### 7. PHP-Befehlsreferenz
 
 `boolean WAA_CheckAlert(integer $InstanzID, string $BorderValue, string $OldValue);`
-Kontrolliert innerhalb des WasserAlarms mit der InstanzID $InstanzID ob ein Grenzwert überschritten wurde und setzt die Alarmvariablen  
+Kontrolliert innerhalb des VerbraucherAlarms mit der InstanzID $InstanzID ob ein Grenzwert überschritten wurde und setzt die Alarmvariablen  
 Die Funktion liefert keinerlei Rückgabewert.  
 `WAA_CheckAlert(12345, "LeakThreashold", "LeakBuffer");`
