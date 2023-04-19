@@ -6,5 +6,5 @@
 
 Folgende Module beinhaltet das WasserAlarm Repository:
 
-- __Wasser-Alarm__ ([Dokumentation](WasserAlarm))  
+- __Wasser-Alarm__ ([Dokumentation](https://www.symcon.de/de/service/dokumentation/modulreferenz/wasser-alarm))  
 	Überwacht eine Zähler-Variable auf unnatürlichen Wasserverbrauch (Leck/Bruch).
