@@ -1,12 +1,12 @@
 {
-	"id": "{B56C568B-4A94-4968-A26C-2B0815C274F6}",
-	"author": "Symcon GmbH",
-	"name": "WasserAlarm",
-	"url": "https://www.symcon.de/",
-	"compatibility": {
-		"version": "4.2"
-	},
-	"version": "1.0",
-	"build": 0,
-	"date": 0
+    "id": "{B56C568B-4A94-4968-A26C-2B0815C274F6}",
+    "author": "Symcon GmbH",
+    "name": "WasserAlarm",
+    "url": "https://www.symcon.de/",
+    "compatibility": {
+        "version": "4.2"
+    },
+    "version": "1.0",
+    "build": 0,
+    "date": 0
 }
