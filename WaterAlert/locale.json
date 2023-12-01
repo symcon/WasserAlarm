@@ -17,7 +17,9 @@
             "Leak threshold": "Leckage Grenzwert",
             "Pipe burst": "Rohrbruch",
             "Pipe burst threshold": "Rohrburch Grenzwert",
-            "Invalid Ident": "Unzulässiger Ident"
+            "Invalid Ident": "Unzulässiger Ident",
+            "WaterAlert": "WasserAlarm",
+            "https://www.symcon.de/en/service/documentation/module-reference/water-alert/": "https://www.symcon.de/de/service/dokumentation/modulreferenz/wasser-alarm/"
         }
     }
 }

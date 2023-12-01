@@ -6,7 +6,7 @@
   </php>
   <source>
     <include>
-      <directory suffix=".php">../WasserAlarm</directory>
+      <directory suffix=".php">../WaterAlert</directory>
     </include>
   </source>
 </phpunit>

@@ -8,8 +8,8 @@ class WasserAlarmValidationTest extends TestCaseSymconValidation
     {
         $this->validateLibrary(__DIR__ . '/..');
     }
-    public function testValidateWasserAlarmModule(): void
+    public function testValidateWaterAlertModule(): void
     {
-        $this->validateModule(__DIR__ . '/../WasserAlarm');
+        $this->validateModule(__DIR__ . '/../WaterAlert');
     }
 }
